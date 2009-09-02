@@ -40,7 +40,7 @@ install(FILES
         pendingcallwatcher.h
         pendingreply.h
         server.h
-        DESTINATION ${INCLUDE_INSTALL_DIR}/qtjolie)
+        DESTINATION ${INCLUDE_INSTALL_DIR}/qtjolie COMPONENT Devel)
 
 if(NOT WIN32) # pkgconfig file
    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/QtJolie.pc.cmake ${CMAKE_CURRENT_BINARY_DIR}/QtJolie.pc @ONLY)
