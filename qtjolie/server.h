@@ -45,6 +45,8 @@ public:
     Error error() const;
     QString errorString() const;
 
+    void sendReply(int clientId, const Message &reply);
+
     bool registerAdaptor(const QByteArray &path, AbstractAdaptor *adaptor);
     bool unregisterAdaptor(const QByteArray &path);
 

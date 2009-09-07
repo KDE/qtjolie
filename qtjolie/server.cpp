@@ -54,6 +54,11 @@ QString Server::errorString() const
     return d->errorString;
 }
 
+void Server::sendReply(int clientId, const Message &reply)
+{
+    d->serverThread->sendMessage(clientId, reply);
+}
+
 bool Server::registerAdaptor(const QByteArray &path, AbstractAdaptor *adaptor)
 {
     if (path.isEmpty() || d->adaptors.contains(path)) {
@@ -61,6 +66,7 @@ bool Server::registerAdaptor(const QByteArray &path, AbstractAdaptor *adaptor)
     }
 
     d->adaptors[path] = adaptor;
+    return true;
 }
 
 bool Server::unregisterAdaptor(const QByteArray &path)
@@ -71,8 +77,7 @@ bool Server::unregisterAdaptor(const QByteArray &path)
 void ServerPrivate::messageReceived(int descriptor, const Message &message)
 {
     if (adaptors.contains(message.resourcePath())) {
-        Message reply = adaptors[message.resourcePath()]->relay(q, message);
-        serverThread->sendMessage(descriptor, reply);
+        adaptors[message.resourcePath()]->relay(q, descriptor, message);
     } else {
         qWarning() << "Got a message for an unregistered object:"
                    << message.operationName()
