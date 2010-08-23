@@ -27,7 +27,7 @@ target_link_libraries(QtJolie ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY})
 install(TARGETS QtJolie
         DESTINATION ${LIB_INSTALL_DIR})
 
-set_target_properties(QtJolie PROPERTIES VERSION 1.0.0 SOVERSION 1)
+set_target_properties(QtJolie PROPERTIES VERSION 0.0.1 SOVERSION 0)
 
 install(FILES
         abstractadaptor.h
