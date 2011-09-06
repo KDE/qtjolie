@@ -1,0 +1,3 @@
+ * Finish MetaService control class
+ * Try to map to QVariant (replacing Value class? or converting to/from it?)
+ * Write Service convenience class
