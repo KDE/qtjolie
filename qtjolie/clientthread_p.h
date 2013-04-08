@@ -44,10 +44,10 @@ public:
 
     void sendMessage(const Message &message);
 
-signals:
+Q_SIGNALS:
     void messageReceived(const Jolie::Message &message);
 
-private slots:
+private Q_SLOTS:
     void readMessage();
     void writeMessageQueue();
 

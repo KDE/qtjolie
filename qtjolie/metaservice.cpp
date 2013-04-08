@@ -77,7 +77,7 @@ QString MetaService::loadService(const QString &name, const QString &fileName)
     message.setData(value);
 
     Message reply = client.call(message);
-    return QString::fromUtf8(reply.data().toByteArray());
+    return QString::fromUtf8(reply.data().toByteArray().constData());
 }
 
 QStringList MetaService::loadedServices() const
@@ -89,8 +89,8 @@ QStringList MetaService::loadedServices() const
     QList<Value> services = reply.data().children("service");
 
     QStringList result;
-    foreach (const Value &service, services) {
-        result << QString::fromUtf8(service.children("resourceName").first().toByteArray());
+    Q_FOREACH (const Value &service, services) {
+        result << QString::fromUtf8(service.children("resourceName").first().toByteArray().constData());
     }
 
     return result;
@@ -117,5 +117,5 @@ QString Jolie::MetaService::addRedirection(const QString &name, const QString &u
     message.setData(value);
 
     Message reply = client.call(message);
-    return QString::fromUtf8(reply.data().toByteArray());
+    return QString::fromUtf8(reply.data().toByteArray().constData());
 }

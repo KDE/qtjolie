@@ -31,7 +31,7 @@ class TestValue : public QObject
 {
     Q_OBJECT
 
-private slots:
+private Q_SLOTS:
     void shouldHandleInvalids()
     {
         Value v;

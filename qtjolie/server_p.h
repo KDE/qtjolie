@@ -41,7 +41,7 @@ public:
         : q(server),
           error(Server::NoError) {}
 
-public slots:
+public Q_SLOTS:
     void messageReceived(int descriptor, const Jolie::Message &message);
 
 private:

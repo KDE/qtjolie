@@ -40,7 +40,7 @@ public:
         : q(client),
           error(Client::NoError) {}
 
-public slots:
+public Q_SLOTS:
     void messageReceived(const Jolie::Message &message);
 
 private:

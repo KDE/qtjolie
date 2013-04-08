@@ -47,10 +47,10 @@ public:
 
     void sendMessage(int descriptor, const Message &message);
 
-signals:
+Q_SIGNALS:
     void messageReceived(int descriptor, const Jolie::Message &message);
 
-private slots:
+private Q_SLOTS:
     void onIncomingConnection();
     void onReadyRead();
 

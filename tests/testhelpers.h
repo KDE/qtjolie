@@ -38,10 +38,10 @@ inline void sodepDump(const Jolie::Value &value, int level)
     }
 
     qDebug() << (indent+value.toByteArray()) << value.toInt() << value.toDouble();
-    foreach (const QByteArray &name, value.childrenNames()) {
+    Q_FOREACH (const QByteArray &name, value.childrenNames()) {
         QList<Jolie::Value> children = value.children(name);
         qDebug() << (indent+"Children:") << name;
-        foreach (const Jolie::Value &child, children) {
+        Q_FOREACH (const Jolie::Value &child, children) {
             sodepDump(child, level+1);
         }
     }
@@ -73,7 +73,7 @@ inline void sodepCompare(const Jolie::Value &v1, const Jolie::Value &v2)
     QList<QByteArray> v2Names = v2.childrenNames();
     QCOMPARE(v1Names, v2Names);
 
-    foreach (const QByteArray &name, v1Names) {
+    Q_FOREACH (const QByteArray &name, v1Names) {
         QList<Jolie::Value> v1Values = v1.children(name);
         QList<Jolie::Value> v2Values = v2.children(name);
 

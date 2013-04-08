@@ -51,13 +51,13 @@ void PendingCallPrivate::setReply(const Message &message)
     isFinished = true;
     reply = message;
 
-    foreach (PendingCallWaiter *waiter, waiters) {
+    Q_FOREACH (PendingCallWaiter *waiter, waiters) {
         waiter->eventLoop.quit();
     }
     waiters.clear();
 
-    foreach (PendingCallWatcher *watcher, watchers) {
-        emit watcher->finished(watcher);
+    Q_FOREACH (PendingCallWatcher *watcher, watchers) {
+        Q_EMIT watcher->finished(watcher);
     }
     watchers.clear();
 }

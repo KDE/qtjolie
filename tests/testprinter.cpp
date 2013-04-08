@@ -55,7 +55,7 @@ public:
         qDebug("Connected!");
     }
 
-private slots:
+private Q_SLOTS:
     void sendMessage()
     {
         Message message("/", "printInput");

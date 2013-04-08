@@ -42,7 +42,7 @@ public:
     {
     }
 
-signals:
+Q_SIGNALS:
     void added(int a, int b, int result);
 
 private:
@@ -51,7 +51,7 @@ private:
         qint32 x = message.data().children("x").first().toInt();
         qint32 y = message.data().children("y").first().toInt();
 
-        emit added(x, y, x+y);
+        Q_EMIT added(x, y, x+y);
         sodepDump(message);
 
         Message reply(message.resourcePath(),
@@ -83,7 +83,7 @@ public:
         delete m_server;
     }
 
-private slots:
+private Q_SLOTS:
     void delayedInit()
     {
         m_server = new Server(8000);

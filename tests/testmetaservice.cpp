@@ -47,7 +47,7 @@ public:
     {
     }
 
-private slots:
+private Q_SLOTS:
     void initTestCase()
     {
         QVERIFY2(m_metaService.start(), "Looks like you don't have Jolie's metaservice command");

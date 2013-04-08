@@ -90,7 +90,7 @@ inline void sodepWrite(QIODevice &io, const Value &value)
 
     sodepWrite(io, value.childrenNames().size());
 
-    foreach (const QByteArray &name, value.childrenNames()) {
+    Q_FOREACH (const QByteArray &name, value.childrenNames()) {
         sodepWrite(io, name);
 
         QList<Value> values = value.children(name);

@@ -58,7 +58,7 @@ public:
         delete m_client;
     }
 
-private slots:
+private Q_SLOTS:
     void delayedInit()
     {
         Value aliases;
@@ -85,7 +85,7 @@ private slots:
 
     void onReturnPressed()
     {
-        Message request((QString::fromUtf8("/")+m_resourcePath).toUtf8(), "webSearch");
+        Message request(static_cast<QString>(QString::fromUtf8("/")+m_resourcePath).toUtf8(), "webSearch");
         Value requestData;
         requestData.children("applicationId") << Value("UrlfFCDV34F.d8xYpsswjaA7P.unhHJ6ELvrhhIb.ybJeUHh.POHIkSf_YO0Fw--");
         requestData.children("query") << Value(m_lineEdit->text().toUtf8());
@@ -96,10 +96,10 @@ private slots:
         m_browser->clear();
         QString html = QString::fromUtf8("<html><body>");
 
-        foreach (const Value &value, response.data().children("Result")) {
-            QString url = QString::fromUtf8(value.children("Url").first().toByteArray());
-            QString title = QString::fromUtf8(value.children("Title").first().toByteArray());
-            QString summary = QString::fromUtf8(value.children("Summary").first().toByteArray());
+        Q_FOREACH (const Value &value, response.data().children("Result")) {
+            QString url = QString::fromUtf8(value.children("Url").first().toByteArray().constData());
+            QString title = QString::fromUtf8(value.children("Title").first().toByteArray().constData());
+            QString summary = QString::fromUtf8(value.children("Summary").first().toByteArray().constData());
 
             html+= QString::fromUtf8(
                             "<div><a href=\"%1\"><b>%2</b></a></div>"

@@ -86,7 +86,7 @@ void ServerThread::readMessage(QAbstractSocket *socket)
     }
 
     Message message = sodepReadMessage(*socket);
-    emit messageReceived(socket->socketDescriptor(), message);
+    Q_EMIT messageReceived(socket->socketDescriptor(), message);
 
     if (socket->bytesAvailable()>0) {
         QMetaObject::invokeMethod(this, "readMessage", Qt::QueuedConnection, Q_ARG(QAbstractSocket*, socket));
@@ -109,4 +109,4 @@ void ServerThread::run()
     delete m_serverSocket;
 }
 
-#include "serverthread_p.moc"
+#include "serverthread.moc"

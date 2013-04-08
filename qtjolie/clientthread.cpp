@@ -64,7 +64,7 @@ void ClientThread::readMessage()
     }
 
     Message message = sodepReadMessage(*m_socket);
-    emit messageReceived(message);
+    Q_EMIT messageReceived(message);
 
     if (m_socket->bytesAvailable()>0) {
         QMetaObject::invokeMethod(this, "readMessage", Qt::QueuedConnection);
@@ -88,4 +88,4 @@ void ClientThread::run()
     delete m_socket;
 }
 
-#include "clientthread_p.moc"
+#include "clientthread.moc"

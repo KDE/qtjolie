@@ -30,7 +30,7 @@ class TestMessage : public QObject
 {
     Q_OBJECT
 
-private slots:
+private Q_SLOTS:
     void shouldVerifyInitialState()
     {
         Message m1("/foo", "bar", 1);

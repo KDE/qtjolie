@@ -97,7 +97,7 @@ public:
         updateTextContent();
     }
 
-private slots:
+private Q_SLOTS:
     void onConnect()
     {
         if (m_sessionId>=0) {
@@ -188,9 +188,9 @@ void PresenterAdaptor::relay(Server *server, int clientId, const Message &messag
     } else if ((message.resourcePath()=="/") && (message.operationName()=="openDocument")) {
         QString url;
         if (message.data().isValid()) {
-            url = QString::fromUtf8(message.data().toByteArray());
+            url = QString::fromUtf8(message.data().toByteArray().constData());
         } else {
-            url = QString::fromUtf8(message.data().children("documentUrl").first().toByteArray());
+            url = QString::fromUtf8(message.data().children("documentUrl").first().toByteArray().constData());
         }
         m_window->documentChanged(url);
     } else {
