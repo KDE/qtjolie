@@ -47,9 +47,25 @@ class PendingCallPrivate : public QSharedData
 {
 public:
     PendingCallPrivate(const Message &message)
-        : id(message.id()), isFinished(false) {}
+        : m_id(message.id()), m_resourcePath(message.resourcePath()),
+          m_operationName(message.operationName()), isFinished(false) {}
 
     void setReply(const Message &message);
+
+    qint64 id() const
+    {
+        return m_id;
+    }
+
+    QByteArray resourcePath() const
+    {
+        return m_resourcePath;
+    }
+
+    QByteArray operationName() const
+    {
+        return m_operationName;
+    }
 
 private:
     friend class PendingCall;
@@ -57,7 +73,9 @@ private:
     friend class PendingCallWaiter;
     friend class PendingReply;
 
-    qint64 id;
+    qint64 m_id;
+    QByteArray m_resourcePath;
+    QByteArray m_operationName;
     bool isFinished;
     Message reply;
     QList<PendingCallWaiter*> waiters;

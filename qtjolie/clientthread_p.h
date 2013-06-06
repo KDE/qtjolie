@@ -45,6 +45,8 @@ public:
     void sendMessage(const Message &message);
 
 Q_SIGNALS:
+    void disconnected();
+
     void messageReceived(const Jolie::Message &message);
 
 private Q_SLOTS:

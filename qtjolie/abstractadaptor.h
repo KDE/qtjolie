@@ -38,6 +38,7 @@ protected:
 public:
     ~AbstractAdaptor();
 
+    virtual void clientDisconnected(int clientId) = 0;
 
 private:
     virtual void relay(Server *server, int clientId, const Message &message) = 0;

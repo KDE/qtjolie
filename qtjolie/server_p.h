@@ -44,6 +44,8 @@ public:
 public Q_SLOTS:
     void messageReceived(int descriptor, const Jolie::Message &message);
 
+    void clientDisconnected(int clientId);
+
 private:
     friend class Server;
     Server * const q;

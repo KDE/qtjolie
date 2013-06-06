@@ -80,6 +80,8 @@ void ClientThread::run()
     connect(this, SIGNAL(messageReceived(Jolie::Message)),
             m_client, SLOT(messageReceived(Jolie::Message)));
 
+    connect(m_socket, SIGNAL(disconnected()), this, SIGNAL(disconnected()));
+
     m_socket->connectToHost(m_hostName, m_port);
     m_socket->waitForConnected(30000);
 

@@ -45,6 +45,11 @@ class PresenterAdaptor : public AbstractAdaptor
 public:
     PresenterAdaptor(MainWindow *parent);
 
+    void clientDisconnected(int clientId)
+    {
+        Q_UNUSED(clientId);
+    }
+
 private:
     void relay(Server *server, int clientId, const Message &message);
 

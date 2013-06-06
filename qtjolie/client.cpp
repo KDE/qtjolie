@@ -32,6 +32,7 @@ Client::Client(const QString &hostName, quint16 port)
     : d(new ClientPrivate(this))
 {
     d->readerThread = new ClientThread(hostName, port, d);
+    QObject::connect(d->readerThread, SIGNAL(disconnected()), d, SLOT(onDisconnected()), Qt::QueuedConnection);
     d->readerThread->start();
 }
 
@@ -77,3 +78,12 @@ void ClientPrivate::messageReceived(const Message &message)
     pending->setReply(message);
 }
 
+void ClientPrivate::onDisconnected()
+{
+    error = Client::UnexpectedClose;
+    for (QMap<int, QExplicitlySharedDataPointer<PendingCallPrivate> >::iterator itPendingCall = pendingCalls.begin();
+         itPendingCall != pendingCalls.end(); ++itPendingCall) {
+        Message answerMsg(itPendingCall->data()->resourcePath(), itPendingCall->data()->operationName(), itPendingCall->data()->id());
+        itPendingCall->data()->setReply(answerMsg);
+    }
+}

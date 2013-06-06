@@ -42,6 +42,11 @@ public:
     {
     }
 
+    void clientDisconnected(int clientId)
+    {
+        Q_UNUSED(clientId);
+    }
+
 Q_SIGNALS:
     void added(int a, int b, int result);
 

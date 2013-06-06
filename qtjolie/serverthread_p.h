@@ -49,6 +49,7 @@ public:
 
 Q_SIGNALS:
     void messageReceived(int descriptor, const Jolie::Message &message);
+    void clientDisconnected(int clientId);
 
 private Q_SLOTS:
     void onIncomingConnection();
@@ -56,6 +57,8 @@ private Q_SLOTS:
 
     void readMessage(QAbstractSocket *socket);
     void writeMessageQueue();
+
+    void onClientDisconnected();
 
 private:
     quint16 m_port;

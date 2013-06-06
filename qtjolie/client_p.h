@@ -43,6 +43,9 @@ public:
 public Q_SLOTS:
     void messageReceived(const Jolie::Message &message);
 
+private Q_SLOTS:
+    void onDisconnected();
+
 private:
     friend class Client;
     Client * const q;

@@ -70,6 +70,8 @@ void ServerThread::onIncomingConnection()
 
         connect(socket, SIGNAL(readyRead()),
                 this, SLOT(onReadyRead()), Qt::QueuedConnection);
+        connect(socket, SIGNAL(disconnected()),
+                this, SLOT(onClientDisconnected()));
     }
 }
 
@@ -99,6 +101,8 @@ void ServerThread::run()
 
     connect(this, SIGNAL(messageReceived(int, Jolie::Message)),
             m_server, SLOT(messageReceived(int, Jolie::Message)));
+    connect(this, SIGNAL(clientDisconnected(int)),
+            m_server, SLOT(clientDisconnected(int)));
     connect(m_serverSocket, SIGNAL(newConnection()),
             this, SLOT(onIncomingConnection()), Qt::QueuedConnection);
 
@@ -107,6 +111,24 @@ void ServerThread::run()
     exec();
 
     delete m_serverSocket;
+}
+
+void ServerThread::onClientDisconnected()
+{
+    QTcpSocket *senderSocket = qobject_cast<QTcpSocket*>(sender());
+
+    if (!senderSocket) {
+        return;
+    }
+
+    QList<int> clientIds = m_sockets.keys(senderSocket);
+
+    for (QList<int>::iterator itClientId = clientIds.begin(); itClientId != clientIds.end(); ++itClientId) {
+        Q_EMIT clientDisconnected(*itClientId);
+        m_sockets.remove(*itClientId);
+    }
+
+    senderSocket->deleteLater();
 }
 
 #include "serverthread.moc"

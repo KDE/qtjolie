@@ -86,3 +86,9 @@ void ServerPrivate::messageReceived(int descriptor, const Message &message)
     }
 }
 
+void ServerPrivate::clientDisconnected(int clientId)
+{
+    for (QMap<QByteArray, AbstractAdaptor*>::iterator itAdaptor = adaptors.begin(); itAdaptor != adaptors.end(); ++itAdaptor) {
+        itAdaptor.value()->clientDisconnected(clientId);
+    }
+}

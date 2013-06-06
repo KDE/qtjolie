@@ -47,7 +47,7 @@ PendingCall &PendingCall::operator=(const PendingCall &other)
 
 void PendingCallPrivate::setReply(const Message &message)
 {
-    Q_ASSERT(message.id()==id);
+    Q_ASSERT(message.id()==m_id);
     isFinished = true;
     reply = message;
 
