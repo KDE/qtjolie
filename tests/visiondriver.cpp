@@ -21,10 +21,10 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
 
-#include <QtGui/QApplication>
-#include <QtGui/QBoxLayout>
-#include <QtGui/QLineEdit>
-#include <QtGui/QTextBrowser>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QBoxLayout>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QTextBrowser>
 
 #include <QtJolie/AbstractAdaptor>
 #include <QtJolie/Client>

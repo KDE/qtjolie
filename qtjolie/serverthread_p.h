@@ -43,7 +43,7 @@ public:
     explicit ServerThread(quint16 port, ServerPrivate *server);
     ~ServerThread();
 
-    void run();
+    void run() Q_DECL_OVERRIDE;
 
     void sendMessage(int descriptor, const Message &message);
 

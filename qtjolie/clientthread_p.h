@@ -40,7 +40,7 @@ public:
     explicit ClientThread(const QString &hostName, quint16 port, ClientPrivate *client);
     ~ClientThread();
 
-    void run();
+    void run() Q_DECL_OVERRIDE;
 
     void sendMessage(const Message &message);
 

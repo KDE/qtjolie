@@ -19,10 +19,10 @@
  */
 
 #include <QtCore/QBuffer>
-#include <QtGui/QApplication>
-#include <QtGui/QBoxLayout>
-#include <QtGui/QLineEdit>
-#include <QtGui/QPushButton>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QBoxLayout>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
 #include <QtNetwork/QTcpSocket>
 
 #include <QtJolie/Message>

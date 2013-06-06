@@ -1,7 +1,7 @@
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}
-                    ${CMAKE_CURRENT_SOURCE_DIR}/../
-                    ${CMAKE_CURRENT_BINARY_DIR}
-                    ${QT_INCLUDE_DIR})
+project(QtJolie)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../
+                    ${CMAKE_CURRENT_BINARY_DIR}/../)
 
 set(qtjolie_LIB_SRCS
   abstractadaptor.cpp
@@ -32,14 +32,28 @@ set(qtjolie_HEADERS
 )
 
 add_library(QtJolie SHARED ${qtjolie_LIB_SRCS})
+
 generate_export_header(QtJolie)
 
-target_link_libraries(QtJolie LINK_PUBLIC ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY})
+target_include_directories(QtJolie PUBLIC "$<BUILD_INTERFACE:${qtjolie_INCLUDE_DIRS}>")
+
+target_link_libraries(QtJolie
+  LINK_PUBLIC
+    Qt5::Core
+  LINK_PRIVATE
+    Qt5::Network
+)
+
+if(IS_ABSOLUTE "${INCLUDE_INSTALL_DIR}")
+  target_include_directories(QtJolie INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}>" )
+else()
+  target_include_directories(QtJolie INTERFACE "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${INCLUDE_INSTALL_DIR}>" )
+endif()
 
 set_target_properties(QtJolie PROPERTIES VERSION   ${QTJOLIE_VERSION_STRING}
                                          SOVERSION ${QTJOLIE_SOVERSION}
                                          LINK_FLAGS "-Wl,--no-undefined")
-
+ 
 install(TARGETS QtJolie EXPORT QtJolieTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install( FILES
